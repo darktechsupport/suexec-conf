@@ -239,7 +239,6 @@ int main(int argc, char *argv[])
     struct group *gr;       /* group entry holder        */
     struct stat dir_info;   /* directory info holder     */
     struct stat prg_info;   /* program info holder       */
-    int clean_environ;      /* clean environment flag    */
     int cwdh;               /* handle to cwd             */
     int allow_size;         /* size of always_allow list */
     int allowed = 0;        /* allowed flag              */
@@ -257,7 +256,7 @@ int main(int argc, char *argv[])
     /*
      * Start with a "clean" environment
      */
-    if (clean_environ) {
+    if (!cfg_getint(cfg, "clean_environ")) {
         clean_env();
     }
 
@@ -287,7 +286,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, " umask=%04o\n",            cfg_getint(cfg, "umask"));
         fprintf(stderr, " userdir_suffix=\"%s\"\n", cfg_getstr(cfg, "userdir_suffix"));
         fprintf(stderr, " always_allow=\"%s\"\n",   cfg_getstr(cfg, "always_allow"));
-        fprintf(stderr, " clean_environ=%d\n",  cfg_getint(cfg, "clean_environ"));
+        fprintf(stderr, " clean_environ=%d\n",      cfg_getint(cfg, "clean_environ"));
         exit(0);
     }
     /*
