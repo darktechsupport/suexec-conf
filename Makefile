@@ -8,7 +8,7 @@ override LDFLAGS += -lconfuse
 all: $(TARGET) suexec.conf.5
 
 $(TARGET): $(SOURCES)
-	$(CC) $(DEFINES) $(INCLUDES) $(LDFLAGS) $(SOURCES) -o$(TARGET)
+	$(CC) $(DEFINES) $(INCLUDES) $(SOURCES) $(LDFLAGS) -o$(TARGET)
 
 suexec.conf.5: suexec.conf.sgml
 	docbook-to-man $< > $@

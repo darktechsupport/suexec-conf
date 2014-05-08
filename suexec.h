@@ -24,7 +24,7 @@
 #ifndef _SUEXEC_H
 #define _SUEXEC_H
 
-#define AP_SUEXEC_VERSION "0.0.1"
+#define AP_SUEXEC_VERSION "0.0.2"
 
 #ifndef AP_SUEXEC_CONF
 #define AP_SUEXEC_CONF "/etc/apache2/suexec.conf"
@@ -108,6 +108,10 @@
 
 #ifndef AP_SUEXEC_UMASK
 #define AP_SUEXEC_UMASK 0022
+#endif
+
+#ifndef AP_CLEAN_ENV
+#define AP_CLEAN_ENV 1
 #endif
 
 #endif /* _SUEXEC_H */

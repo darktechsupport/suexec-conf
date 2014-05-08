@@ -117,6 +117,13 @@ The docbook-to-man binary is found in the docbook-to-man package.
 					<para>always_allow={"/path/to/bin1","/path/to/bin2","/path/to/dir/"}</para>
 				</listitem>
 			</varlistentry>
+                        <varlistentry>
+                                <term><option>clean_environ</option>
+                                </term>
+                                <listitem>
+                                        <para>The envronment that the executing command runs in is stripped of all but a select few variables unless this is set to non-zero. Default 0.</para>
+                                </listitem>
+                        </varlistentry>
 		</variablelist>
 	</refsect1>
 	<refsect1>

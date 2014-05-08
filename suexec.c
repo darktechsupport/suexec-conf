@@ -67,6 +67,7 @@ cfg_opt_t config_opts[] =
         CFG_STR("doc_root", AP_DOC_ROOT, CFGF_NONE),
         CFG_STR("userdir_suffix", AP_USERDIR_SUFFIX, CFGF_NONE),
         CFG_INT("umask", AP_SUEXEC_UMASK, CFGF_NONE),
+        CFG_INT("clean_environ", AP_CLEAN_ENV, CFGF_NONE),
         CFG_END()
 };
 
@@ -238,20 +239,26 @@ int main(int argc, char *argv[])
     struct group *gr;       /* group entry holder        */
     struct stat dir_info;   /* directory info holder     */
     struct stat prg_info;   /* program info holder       */
+    int clean_environ;      /* clean environment flag    */
     int cwdh;               /* handle to cwd             */
     int allow_size;         /* size of always_allow list */
     int allowed = 0;        /* allowed flag              */
     int i;
 
     /*
-     * Start with a "clean" environment
+     * Start by loading the configuration
      */
-    clean_env();
-
     cfg = cfg_init(config_opts, CFGF_NONE);
     if(cfg_parse(cfg, config_file) == CFG_PARSE_ERROR) {
         fprintf(stderr, "fatal: suexec failed to load config file %s\n", config_file);
         exit(99);
+    }
+
+    /*
+     * Start with a "clean" environment
+     */
+    if (clean_environ) {
+        clean_env();
     }
 
     prog = argv[0];
@@ -280,6 +287,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, " umask=%04o\n",            cfg_getint(cfg, "umask"));
         fprintf(stderr, " userdir_suffix=\"%s\"\n", cfg_getstr(cfg, "userdir_suffix"));
         fprintf(stderr, " always_allow=\"%s\"\n",   cfg_getstr(cfg, "always_allow"));
+        fprintf(stderr, " clean_environ=%d\n",  cfg_getint(cfg, "clean_environ"));
         exit(0);
     }
     /*

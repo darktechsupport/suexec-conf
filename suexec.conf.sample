@@ -6,4 +6,5 @@
 # doc_root = "/srv/www"
 # userdir_suffix = "public_html"
 # umask = 022
+# clean_environ = 0
 
